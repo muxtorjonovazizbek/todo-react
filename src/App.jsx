@@ -9,7 +9,7 @@ function App() {
   const [age, setAge] = useState("");
   const [isPressed, setPressed] = useState(null);
 
-  
+  // Foydalanuvchilarni olish
   useEffect(() => {
     const fetchData = async () => {
       let data = await axios.get("http://localhost:3000/data");
@@ -19,19 +19,20 @@ function App() {
     fetchData();
   }, []);
 
-  
+  // Foydalanuvchini o'chirish
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/data/${id}`);
     setUsers(users.filter((user) => user.id !== id));
   };
 
-  
+  // Foydalanuvchini tahrirlash
   const onEdit = (user) => {
     setName(user.name);
     setAge(user.age);
     setPressed(user.id);
   };
 
+  // Tahrirlangan foydalanuvchini saqlash
   const onSave = async () => {
     if (isPressed) {
       await axios.put(`http://localhost:3000/data/${isPressed}`, {
@@ -43,25 +44,25 @@ function App() {
           user.id === isPressed ? { ...user, name, age } : user
         )
       );
-      setPressed(null); 
-      setName(""); 
+      setPressed(null); // Tahrir rejimidan chiqish
+      setName(""); // Inputlarni tozalash
       setAge("");
     }
   };
 
-  
+  // Yangi foydalanuvchini yaratish
   const handleCreate = async () => {
     if (name && age) {
       const newUser = { name, age };
       const response = await axios.post("http://localhost:3000/data", newUser);
-      setUsers([...users, response.data]); 
-      setName(""); 
+      setUsers([...users, response.data]); // Yangi foydalanuvchini ro'yxatga qo'shish
+      setName(""); // Inputlarni tozalash
       setAge("");
     }
   };
 
   return (
-    <div style={{ marginLeft: "300px" }}>
+    <div style={{ marginLeft: "490px" }}>
       <div
         style={{
           display: "flex",
@@ -70,23 +71,25 @@ function App() {
           paddingBottom: "10px",
         }}
       >
-        <input
+       <form style={{display: "flex", gap: "35px", alignItems: "center"}}>
+       <input
           type="text"
           placeholder="name"
           value={name}
-          onChange={(e) => setName(e.target.value)} 
+          onChange={(e) => setName(e.target.value)} // Ismni yangilash
           style={{ height: "20px" }}
         />
         <input
           type="number"
           placeholder="age"
           value={age}
-          onChange={(e) => setAge(e.target.value)} 
+          onChange={(e) => setAge(e.target.value)} // Yoshni yangilash
           style={{ height: "20px" }}
         />
-        <button onClick={handleCreate} style={{ height: "40px" }}>
+        <button type="submit" onClick={handleCreate} style={{ height: "40px" }}>
           Create
         </button>
+       </form>
       </div>
 
       <table border={1} width={"100%"}>
@@ -101,7 +104,7 @@ function App() {
         <tbody>
           {users.map((user,ind) => (
             <tr key={user.id}>
-              <td>{ind + 1}</td> 
+              <td>{ind + 1}</td> {/* ID to'g'ri chiqadi */}
               {isPressed === user.id ? (
                 <td>
                   <input
