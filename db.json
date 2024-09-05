@@ -1,19 +1,14 @@
 {
-    "data": [
-        {
-            "id": 1,
-            "name": "John",
-            "age": 25
-        },
-        {
-            "id": 2,
-            "name": "David",
-            "age": 15
-        },
-        {
-            "id": 3,
-            "name": "Sam",
-            "age": 22
-        }
-    ]
+  "data": [
+    {
+      "name": "David",
+      "age": "20",
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "name": "Sam",
+      "age": 22
+    }
+  ]
 }

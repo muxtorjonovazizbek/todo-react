@@ -15,7 +15,7 @@ function App() {
 
 
   const handleDelete = async (id) => {
-    await axios.delete("http://localhost:3000/data/${id}");
+    await axios.delete(`http://localhost:3000/data/${id}`);
     setUsers(users.filter((user) => user.id !== id));
   };
   const onEdit = async (user) => {
@@ -25,7 +25,7 @@ function App() {
   };
   const onSave = async () => {
     if (ispressed) {
-      await axios.put("http://localhost:3000/data/${ispressed}",{
+      await axios.put(`http://localhost:3000/data/${ispressed}`,{
         name,
         age,
       });
